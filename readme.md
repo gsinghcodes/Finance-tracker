@@ -68,12 +68,25 @@ A full-stack web application for tracking daily expenses, setting monthly budget
 
 ## Current Implementation
 
-- **Backend MongoDB Schemas:**  
-  - [`models/userSchema.js`](backend/models/userSchema.js): User schema  
-  - [`models/expenseSchema.js`](backend/models/expenseSchema.js): Expense schema  
-  - [`models/budgetSchema.js`](backend/models/budgetSchema.js): Budget schema  
-- **Basic Express server:** [`backend/app.js`](backend/app.js)
-- **Frontend:** Next.js app scaffolded, with TailwindCSS setup
+### Backend
+- **MongoDB Schemas:**  
+  - [`backend/models/userSchema.js`](backend/models/userSchema.js): User schema  
+  - [`backend/models/expenseSchema.js`](backend/models/expenseSchema.js): Expense schema  
+  - [`backend/models/budgetSchema.js`](backend/models/budgetSchema.js): Budget schema  
+- **Controllers:**  
+  - [`backend/controllers/userControllers.js`](backend/controllers/userControllers.js): User-related logic
+- **Routes:**  
+  - [`backend/routes/userRoutes.js`](backend/routes/userRoutes.js): User-related API routes
+- **Database Connection:**  
+  - [`backend/dbcon.js`](backend/dbcon.js): MongoDB connection setup
+- **Express Server:**  
+  - [`backend/app.js`](backend/app.js): Main Express server setup
+
+### Frontend
+- **Next.js App:**  
+  - [`frontend/`](frontend/): Next.js app scaffolded with TailwindCSS
+  - Main entry: [`frontend/src/app/page.js`](frontend/src/app/page.js)
+  - Global styles: [`frontend/src/app/globals.css`](frontend/src/app/globals.css)
 
 ---
 
