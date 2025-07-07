@@ -1,18 +1,16 @@
 import express from 'express';
-import { deleteBudget, getBudgets, setBudget, updateBudget } from '../controllers/budgetControllers';
+import { deleteBudget, getBudgets, setBudget } from '../controllers/budgetControllers.js';
+import { authenticate } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
 // Set a new budget or update if same category+month already exists
-router.post('/', setBudget);
+router.post('/', authenticate, setBudget);
 
 // Get budgets for current user (optional ?month=YYYY-MM)
-router.get('/', getBudgets);
-
-// Update budget by ID
-router.put('/:id', updateBudget);
+router.get('/', authenticate, getBudgets);
 
 // Delete budget by ID
-router.delete('/:id', deleteBudget);
+router.delete('/:id', authenticate, deleteBudget);
 
 export default router;

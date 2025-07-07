@@ -3,14 +3,13 @@ import Expense from '../models/expenseSchema.js';
 // Create a new expense
 export const addExpense = async (req, res) => {
   try {
-    const { amount, category, paymentMethod, date, notes } = req.body;
+    const { amount, category, paymentMethod, date } = req.body;
 
     const expense = await Expense.create({
       amount,
       category,
       paymentMethod,
       date,
-      notes,
       user: req.user.userId
     });
 

@@ -1,4 +1,4 @@
-import { pool } from "../db/mysqlClient";
+import { pool } from "../db/mysqlClient.js";
 
 
 export const insertMonthlyReport = async ({

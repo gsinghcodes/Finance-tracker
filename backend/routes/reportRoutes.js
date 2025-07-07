@@ -1,5 +1,5 @@
 import express from 'express';
-import { getLastThreeReports } from '../services/reportService';
+import { getLastThreeReports } from '../services/reportService.js';
 
 const router = express.Router();
 
