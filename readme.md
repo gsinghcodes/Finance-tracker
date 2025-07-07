@@ -1,28 +1,24 @@
 # Finance Tracker
 
-A full-stack web application for tracking daily expenses, setting monthly budgets, and viewing simple reports to help users understand and manage their spending. The project will also include a Python service for smart budget suggestions.
+A full-stack web application for tracking daily expenses, setting monthly budgets, and viewing simple reports to help users understand and manage their spending. The project also includes a Python service for smart budget suggestions and monthly SQL-based reporting.
 
 ---
 
-## Features (Planned & In Progress)
+## Features
 
 ### 1. User Accounts
-- Users can sign up and log in using email and password.
+- Sign up and log in with email and password.
 - Each user sees only their own data after login.
 
 ### 2. Add & Manage Expenses
-- Users can add, edit, and delete expenses.
-- Each expense includes:
-  - Amount (e.g., ₹1200)
-  - Category (e.g., Food, Rent, Shopping, etc.)
-  - Date
-  - Payment Method (e.g., UPI, Credit Card, Cash)
-- Users can filter expenses by date, category, or payment method.
-- Users can search expenses.
+- Add, edit, and delete expenses.
+- Each expense includes: Amount, Category, Date, Payment Method, Notes.
+- Filter expenses by date, category, or payment method.
+- Search expenses.
 
 ### 3. Budget & Alerts
-- Users can set a monthly spending limit for each category.
-- Shows a warning/alert if a category crosses 80% or 100% of its budget.
+- Set a monthly spending limit for each category.
+- Warning/alert if a category crosses 80% or 100% of its budget.
 
 ### 4. Dashboard (Reports Page)
 - Total money spent in the current month.
@@ -30,19 +26,19 @@ A full-stack web application for tracking daily expenses, setting monthly budget
 - Top 3 payment methods used.
 - Pie chart for category-wise spending.
 - Line graph for spending over time.
-- (Charts will use Chart.js or Recharts.)
+- (Charts use Recharts.)
 
 ### 5. Smart Suggestions (Python Service)
-- Python script or Flask API analyzes last 30 days of spending.
+- Python Flask API analyzes last 30 days of spending.
 - Provides suggestions, e.g.:
   - “You’re spending a lot on Food. Try to reduce it by 15%.”
   - “Your travel expenses increased a lot this month.”
-- (Optional) Suggestions returned as JSON for frontend display.
+- Suggestions returned as JSON for frontend display.
 
 ### 6. Monthly Reports (SQL)
-- Each month, save a summary report in a SQL database (SQLite/PostgreSQL).
-- Store: User ID, Month, Total Spent, Top Category, Overbudget Categories.
-- (Optional) Show past 3 months’ reports using SQL queries.
+- Each month, a summary report is saved in a SQL database (MySQL).
+- Stores: User ID, Month, Total Spent, Top Category, Overbudget Categories.
+- View past 3 months’ reports in the app.
 
 ---
 
@@ -53,9 +49,42 @@ A full-stack web application for tracking daily expenses, setting monthly budget
 | Frontend     | Next.js (React) + TailwindCSS        |
 | Backend      | Node.js + Express.js                 |
 | Main DB      | MongoDB (users, expenses, budgets)   |
-| SQL DB       | SQLite or PostgreSQL (reports)       |
-| Charts       | Chart.js or Recharts                 |
-| Python       | Flask or CLI script + Pandas         |
+| SQL DB       | MySQL (reports)                      |
+| Charts       | Recharts                             |
+| Python       | Flask + Pandas                       |
+
+---
+
+## Setup & Running Locally
+
+### Prerequisites
+- Node.js, npm
+- MongoDB
+- MySQL
+- Python 3.x
+
+### 1. Backend
+- `cd backend`
+- Copy `.env.example` to `.env` and fill in your MongoDB and MySQL credentials
+- Install dependencies: `npm install`
+- Start server: `npm start`
+
+### 2. Python Suggestions API
+- `cd backend/python-suggestions-api`
+- Install dependencies: `pip install -r requirements.txt`
+- Run: `python app.py`
+
+### 3. Frontend
+- `cd frontend`
+- Install dependencies: `npm install`
+- Start dev server: `npm run dev`
+
+### 4. Monthly Report Job
+- To generate monthly reports, run:
+  ```
+  node backend/scripts/runMonthlyReportJob.js
+  ```
+- This reads expenses/budgets from MongoDB and saves monthly summaries in MySQL.
 
 ---
 
@@ -66,28 +95,28 @@ A full-stack web application for tracking daily expenses, setting monthly budget
 
 ---
 
-## Current Implementation
+## Environment Variables
 
-### Backend
-- **MongoDB Schemas:**  
-  - [`backend/models/userSchema.js`](backend/models/userSchema.js): User schema  
-  - [`backend/models/expenseSchema.js`](backend/models/expenseSchema.js): Expense schema  
-  - [`backend/models/budgetSchema.js`](backend/models/budgetSchema.js): Budget schema  
-- **Controllers:**  
-  - [`backend/controllers/userControllers.js`](backend/controllers/userControllers.js): User-related logic
-- **Routes:**  
-  - [`backend/routes/userRoutes.js`](backend/routes/userRoutes.js): User-related API routes
-- **Database Connection:**  
-  - [`backend/dbcon.js`](backend/dbcon.js): MongoDB connection setup
-- **Express Server:**  
-  - [`backend/app.js`](backend/app.js): Main Express server setup
-
-### Frontend
-- **Next.js App:**  
-  - [`frontend/`](frontend/): Next.js app scaffolded with TailwindCSS
-  - Main entry: [`frontend/src/app/page.js`](frontend/src/app/page.js)
-  - Global styles: [`frontend/src/app/globals.css`](frontend/src/app/globals.css)
+See `.env.example` for all required variables. Do not commit secrets.
 
 ---
 
-_This README will be updated as the project progresses._
+## Current Implementation
+
+### Backend
+- MongoDB Schemas: users, expenses, budgets
+- Controllers: user, expense, budget, suggestion
+- Routes: user, expense, budget, report, suggestion
+- Database Connections: MongoDB and MySQL
+- Express Server: main API
+- Monthly Report Job: `backend/scripts/runMonthlyReportJob.js`
+
+### Frontend
+- Next.js App: all user features, dashboard, reports
+- Global styles: TailwindCSS
+
+### Python
+- Flask API for smart suggestions
+- Uses Pandas for analysis
+
+---
