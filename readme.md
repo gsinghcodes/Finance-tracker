@@ -1,4 +1,4 @@
-# Finance Tracker
+# FinSight
 
 A full-stack web application for tracking daily expenses, setting monthly budgets, and viewing simple reports to help users understand and manage their spending. The project also includes a Python service for smart budget suggestions and monthly SQL-based reporting.
 
